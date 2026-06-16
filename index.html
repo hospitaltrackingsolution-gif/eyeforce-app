@@ -4,230 +4,77 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>EyeForce Solutions</title>
-
-  <!-- PWA Manifest -->
   <link rel="manifest" href="manifest.json">
-
-  <!-- iOS Homescreen Icons -->
   <link rel="apple-touch-icon" sizes="180x180" href="icon-180.png">
   <link rel="apple-touch-icon" sizes="152x152" href="icon-152.png">
   <link rel="apple-touch-icon" sizes="120x120" href="icon-120.png">
-
-  <!-- Browser Favicons -->
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-  <link rel="icon" type="image/png" sizes="32x32"  href="icon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16"  href="icon-16.png">
-
-  <!-- PWA / App settings -->
-  <meta name="mobile-web-app-capable"         content="yes">
-  <meta name="apple-mobile-web-app-capable"   content="yes">
+  <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title"     content="EyeForce">
-  <meta name="application-name"               content="EyeForce">
-  <meta name="theme-color"                    content="#15233B">
-
+  <meta name="apple-mobile-web-app-title" content="EyeForce">
+  <meta name="theme-color" content="#15233B">
   <style>
-    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-
-    html, body {
-      width:100%; height:100%;
-      background:#15233B;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
-      overflow: hidden;
-    }
-
-    /* Safe area for iPhone notch */
-    @supports (padding-top: env(safe-area-inset-top)) {
-      body { padding-top: env(safe-area-inset-top); }
-    }
-
-    /* Full-screen branded splash */
-    #splash {
-      position: fixed; inset: 0;
-      background: #15233B;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 0;
-      text-align: center;
-      padding: 40px 24px;
-    }
-
-    /* Logo */
-    .logo-wrap {
-      background: #ffffff;
-      border-radius: 24px;
-      padding: 18px;
-      width: 160px; height: 160px;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
-      margin-bottom: 28px;
-    }
-    .logo-wrap img {
-      width: 100%; height: 100%; object-fit: contain;
-    }
-
-    /* Company name */
-    .company-name {
-      font-size: 26px;
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: 0.2px;
-      margin-bottom: 6px;
-    }
-    .company-tagline {
-      font-size: 12px;
-      color: #C8A24A;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      margin-bottom: 40px;
-    }
-
-    /* Launch button */
-    .launch-btn {
-      display: inline-flex;
-      align-items: center; justify-content: center;
-      gap: 10px;
-      background: #1F9E8E;
-      color: #ffffff;
-      font-size: 16px;
-      font-weight: 700;
-      padding: 16px 36px;
-      border-radius: 50px;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      box-shadow: 0 4px 20px rgba(31,158,142,0.4);
-      transition: transform 0.15s, box-shadow 0.15s;
-      -webkit-tap-highlight-color: transparent;
-      margin-bottom: 16px;
-    }
-    .launch-btn:active {
-      transform: scale(0.97);
-      box-shadow: 0 2px 10px rgba(31,158,142,0.3);
-    }
-    .launch-arrow {
-      font-size: 20px;
-      transition: transform 0.2s;
-    }
-
-    /* Auto-redirect countdown */
-    .redirect-note {
-      font-size: 12px;
-      color: rgba(255,255,255,0.45);
-      margin-top: 4px;
-    }
-    #countdown { color: #C8A24A; font-weight: 600; }
-
-    /* Loading dots animation */
-    .dots {
-      display: flex; gap: 6px;
-      justify-content: center;
-      margin-top: 32px;
-    }
-    .dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.3);
-      animation: bounce 1.4s infinite ease-in-out;
-    }
-    .dot:nth-child(1) { animation-delay: 0s;    background: #1F9E8E; }
-    .dot:nth-child(2) { animation-delay: 0.2s;  background: #C8A24A; }
-    .dot:nth-child(3) { animation-delay: 0.4s;  background: #ffffff; }
-    @keyframes bounce {
-      0%,80%,100% { transform: scale(0.6); opacity:0.5; }
-      40%         { transform: scale(1.0); opacity:1;   }
-    }
-
-    /* Install hint (shown only when page is not in standalone mode) */
-    .install-hint {
-      position: fixed;
-      bottom: calc(20px + env(safe-area-inset-bottom, 0px));
-      left: 50%; transform: translateX(-50%);
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 12px;
-      padding: 10px 18px;
-      font-size: 11px;
-      color: rgba(255,255,255,0.5);
-      text-align: center;
-      white-space: nowrap;
-      display: none;
-    }
-    body.not-standalone .install-hint { display: block; }
+    *{margin:0;padding:0;box-sizing:border-box}
+    html,body{width:100%;height:100%;background:#15233B;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;overflow:hidden}
+    @supports(padding-top:env(safe-area-inset-top)){body{padding-top:env(safe-area-inset-top)}}
+    #splash{position:fixed;inset:0;background:#15233B;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;text-align:center;padding:40px 24px}
+    .logo-wrap{background:#fff;border-radius:24px;padding:18px;width:160px;height:160px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(0,0,0,0.35);margin-bottom:28px}
+    .logo-wrap img{width:100%;height:100%;object-fit:contain}
+    .company-name{font-size:26px;font-weight:700;color:#fff;letter-spacing:0.2px;margin-bottom:6px}
+    .company-tagline{font-size:12px;color:#C8A24A;letter-spacing:0.14em;text-transform:uppercase;margin-bottom:40px}
+    .launch-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#1F9E8E;color:#fff;font-size:16px;font-weight:700;padding:16px 36px;border-radius:50px;border:none;cursor:pointer;text-decoration:none;box-shadow:0 4px 20px rgba(31,158,142,0.4);margin-bottom:16px;-webkit-tap-highlight-color:transparent}
+    .redirect-note{font-size:12px;color:rgba(255,255,255,0.45);margin-top:4px}
+    #countdown{color:#C8A24A;font-weight:600}
+    .dots{display:flex;gap:6px;justify-content:center;margin-top:32px}
+    .dot{width:7px;height:7px;border-radius:50%;animation:bounce 1.4s infinite ease-in-out}
+    .dot:nth-child(1){animation-delay:0s;background:#1F9E8E}
+    .dot:nth-child(2){animation-delay:0.2s;background:#C8A24A}
+    .dot:nth-child(3){animation-delay:0.4s;background:#fff}
+    @keyframes bounce{0%,80%,100%{transform:scale(0.6);opacity:0.5}40%{transform:scale(1.0);opacity:1}}
+    .install-hint{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:10px 18px;font-size:11px;color:rgba(255,255,255,0.5);text-align:center;white-space:nowrap;display:none}
+    body.not-standalone .install-hint{display:block}
   </style>
 </head>
 <body>
-
   <div id="splash">
     <div class="logo-wrap">
       <img src="icon-512.png" alt="EyeForce Solutions">
     </div>
-
     <div class="company-name">EyeForce Solutions</div>
     <div class="company-tagline">Practice &amp; Business Intelligence</div>
-
-    <!-- Manual launch button -->
-    <a class="launch-btn" id="launchBtn" href="REPLACE_WITH_YOUR_APPS_SCRIPT_URL">
-      Open EyeForce App
-      <span class="launch-arrow">→</span>
+    <a class="launch-btn" id="launchBtn" href="https://script.google.com/macros/s/AKfycbyMgl1VCYpy5hARiyywhFeTmQ7LsoXDtE26UIFnQxummsHyBHovDsnwl4Tjl74QonU0/exec">
+      Open EyeForce App &nbsp;→
     </a>
-
-    <div class="redirect-note">
-      Auto-opening in <span id="countdown">3</span>s…
-    </div>
-
+    <div class="redirect-note">Auto-opening in <span id="countdown">3</span>s…</div>
     <div class="dots">
       <div class="dot"></div>
       <div class="dot"></div>
       <div class="dot"></div>
     </div>
   </div>
-
-  <!-- Install hint shown in browser (not in standalone PWA mode) -->
-  <div class="install-hint" id="installHint">
-    📲 Tap Share → Add to Home Screen to save as app
-  </div>
-
+  <div class="install-hint" id="installHint"></div>
   <script>
-    // ── Replace this URL with your actual Apps Script deployment URL ────────
-    var APP_URL = 'https://script.google.com/macros/s/AKfycbyMgl1VCYpy5hARiyywhFeTmQ7LsoXDtE26UIFnQxummsHyBHovDsnwl4Tjl74QonU0/exec';
-
-    // ── Set the URL on the launch button ────────────────────────────────────
-    document.getElementById('launchBtn').href = APP_URL;
-
-    // ── Auto-redirect countdown ─────────────────────────────────────────────
+    var APP_URL = "https://script.google.com/macros/s/AKfycbyMgl1VCYpy5hARiyywhFeTmQ7LsoXDtE26UIFnQxummsHyBHovDsnwl4Tjl74QonU0/exec";
+    document.getElementById("launchBtn").href = APP_URL;
     var count = 3;
-    var timer = setInterval(function() {
+    var timer = setInterval(function(){
       count--;
-      var el = document.getElementById('countdown');
-      if (el) el.textContent = count;
-      if (count <= 0) {
-        clearInterval(timer);
-        window.location.href = APP_URL;
-      }
+      var el = document.getElementById("countdown");
+      if(el) el.textContent = count;
+      if(count <= 0){ clearInterval(timer); window.location.href = APP_URL; }
     }, 1000);
-
-    // ── Cancel auto-redirect if user taps the button manually ───────────────
-    document.getElementById('launchBtn').addEventListener('click', function() {
-      clearInterval(timer);
-    });
-
-    // ── Show install hint if not already installed as PWA ───────────────────
-    var isStandalone = window.matchMedia('(display-mode: standalone)').matches
-                    || window.navigator.standalone === true;
-    if (!isStandalone) {
-      document.body.classList.add('not-standalone');
-      // Show iOS-specific hint
+    document.getElementById("launchBtn").addEventListener("click", function(){ clearInterval(timer); });
+    var isStandalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+    if(!isStandalone){
+      document.body.classList.add("not-standalone");
+      var hint = document.getElementById("installHint");
       var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-      if (isIOS) {
-        document.getElementById('installHint').textContent =
-          '📲 Tap Share ↑ → Add to Home Screen for the EyeForce app icon';
-      } else {
-        document.getElementById('installHint').textContent =
-          '📲 Tap ⋮ menu → Add to Home Screen to save as app';
-      }
+      hint.textContent = isIOS
+        ? "📲 Tap Share ↑ → Add to Home Screen for EyeForce app icon"
+        : "📲 Tap ⋮ menu → Add to Home Screen to save as app";
     }
   </script>
-
 </body>
 </html>
